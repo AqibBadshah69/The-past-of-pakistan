@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Past of Pakistan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --pak-green: #002B15;
+            --pak-green-light: #004d26;
+            --gold: #D4AF37;
+            --gold-hover: #f1c40f;
+            --bg-dark: #07170f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #f8f9fa;
+            --text-muted: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Phone Frame Simulation */
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            height: 820px;
+            background-color: var(--pak-green);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 12px #121814;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Phone Top Bar */
+        .status-bar {
+            height: 30px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+
+        /* Screen Wrapper */
+        .screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+            transition: opacity 0.4s ease;
+        }
+
+        .screen::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .screen::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        #splash-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 24px 30px;
+            height: 100%;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-top: 120px;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .logo-icon {
+            font-size: 80px;
+            color: var(--gold);
+            margin-bottom: 24px;
+            filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.3));
+        }
+
+        .app-title {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+        }
+
+        .app-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        .branding {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .enter-btn {
+            margin-top: 30px;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--gold), #b89228);
+            color: var(--pak-green);
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        #main-screen {
+            display: none;
+            padding: 20px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 22px;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .category-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            white-space: nowrap;
+            font-size: 13px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .chip.active {
+            background: var(--gold);
+            color: var(--pak-green);
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--gold);
+            font-size: 16px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .bottom-nav {
+            height: 60px;
+            background: rgba(0, 20, 10, 0.95);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 11px;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phone Frame -->
+    <div class="phone-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <div>
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi" style="margin: 0 4px;"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <div id="splash-screen" class="screen">
+            <div class="logo-container">
+                <i class="fas fa-landmark logo-icon"></i>
+                <h1 class="app-title">The Past of Pakistan</h1>
+                <p class="app-subtitle">Explore History, Culture & Updates</p>
+                <button class="enter-btn" onclick="openApp()">
+                    Explore Now <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="branding">Made By Aqib</div>
+        </div>
+
+        <div id="main-screen" class="screen">
+            <div class="header">
+                <h2>History & Heritage</h2>
+                <i class="fas fa-bell" style="color: var(--gold); cursor: pointer;"></i>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search" style="color: var(--text-muted);"></i>
+                <input type="text" placeholder="Search historical events, monuments...">
+            </div>
+
+            <div class="category-scroll">
+                <div class="chip active">All Era</div>
+                <div class="chip">Indus Valley</div>
+                <div class="chip">Mughal Era</div>
+                <div class="chip">1947 Movement</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fas fa-monument" style="margin-right: 8px;"></i>Mohenjo-daro</span>
+                        <span style="font-size: 11px; color: var(--gold);">2500 BCE</span>
+                    </div>
+                    <p class="card-desc">One of the largest settlements of the ancient Indus Valley Civilisation, renowned for its urban planning and engineering.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fas fa-crown" style="margin-right: 8px;"></i>Badshahi Mosque</span>
+                        <span style="font-size: 11px; color: var(--gold);">1673 CE</span>
+                    </div>
+                    <p class="card-desc">A masterpiece Mughal-era mosque located in Lahore, built by Emperor Aurangzeb.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fas fa-flag" style="margin-right: 8px;"></i>Pakistan Resolution</span>
+                        <span style="font-size: 11px; color: var(--gold);">1940 CE</span>
+                    </div>
+                    <p class="card-desc">The historic resolution passed at Minto Park (now Iqbal Park) demanding an independent state for Muslims.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('splash')">
+                <i class="fas fa-home"></i>
+                <span>Splash</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('explore')">
+                <i class="fas fa-compass"></i>
+                <span>Explore</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-book-open"></i>
+                <span>Stories</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openApp() {
+            document.getElementById('splash-screen').style.display = 'none';
+            document.getElementById('main-screen').style.display = 'flex';
+            
+            // Update Active Nav Indicator
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems[0].classList.remove('active');
+            navItems[1].classList.add('active');
+        }
+
+        function switchTab(tab) {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainScreen = document.getElementById('main-screen');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            if (tab === 'splash') {
+                splashScreen.style.display = 'flex';
+                mainScreen.style.display = 'none';
+                navItems[0].classList.add('active');
+                navItems[1].classList.remove('active');
+            } else if (tab === 'explore') {
+                splashScreen.style.display = 'none';
+                mainScreen.style.display = 'flex';
+                navItems[0].classList.remove('active');
+                navItems[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
